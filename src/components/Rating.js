@@ -5,6 +5,7 @@ const Rating = ({
   rating,
   enableAnimation,
   onChange,
+  editable,
   backgroundClass,
   starColor,
 }) => {
@@ -23,7 +24,7 @@ const Rating = ({
 
   // Handle click to change rating (editable)
   const handleStarClick = (index) => {
-    if (enableAnimation && onChange) {
+    if (editable) {
       setCurrentRating(index);
       onChange(index);
     }
@@ -41,7 +42,7 @@ const Rating = ({
         return (
           <StarComponent
             key={starIndex}
-            whileHover={enableAnimation ? { scale: 1.2 } : {}}
+            whileHover={enableAnimation & editable ? { scale: 1.2 } : {}}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
             onMouseEnter={() => handleMouseEnter(starIndex)}
             onMouseLeave={handleMouseLeave}

@@ -149,7 +149,7 @@ function App() {
                 </div>
                 <div className="flex mt-6 gap-4 items-center ">
                   <Rating
-                    rating={currentRating}
+                    rating={ratingAlert}
                     editable={true}
                     enableAnimation={true}
                     starColor="#EC8A1C"
