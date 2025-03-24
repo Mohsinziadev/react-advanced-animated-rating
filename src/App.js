@@ -48,6 +48,7 @@ function App() {
                   <Rating
                     rating={currentRating}
                     editable={true}
+                    enableAnimation={true}
                     starColor="#FFDF00"
                     backgroundClass="bg-[#f8f8f8] rounded-md p-0"
                     onChange={handleRatingChange}
@@ -74,6 +75,7 @@ function App() {
                     rating={currentRating}
                     editable={true}
                     starColor="#FFDF00"
+                    enableAnimation={true}
                     backgroundClass="bg-none rounded-md p-0"
                     onChange={handleRatingChange}
                   />
@@ -97,6 +99,7 @@ function App() {
                 <div className="flex mt-6 gap-4 items-center ">
                   <Rating
                     rating={readonylyRating}
+                    enableAnimation={true}
                     starColor="black"
                     backgroundClass="bg-[#f8f8f8] rounded-md p-0"
                     editable={false}
@@ -114,7 +117,7 @@ function App() {
               <div className="">
                 <div className="flex flex-col gap-0 text-center">
                   <h2 className="text-md font-light text-gray-800">
-                    Read-Only Rating with no Background
+                    Read-Only Rating with no Animation
                   </h2>
                   <p className="text-sm text-[#adadad] m-0 p-0 font-light">
                     Read-Only Rating: View and Review{" "}
@@ -123,6 +126,7 @@ function App() {
                 <div className="flex mt-6 gap-4 items-center ">
                   <Rating
                     rating={readonylyRating}
+                    enableAnimation={false}
                     starColor="black"
                     backgroundClass="bg-none rounded-md p-0"
                     editable={false}
@@ -147,6 +151,7 @@ function App() {
                   <Rating
                     rating={currentRating}
                     editable={true}
+                    enableAnimation={true}
                     starColor="#EC8A1C"
                     backgroundClass="bg-[#f8f8f8] rounded-md p-0"
                     onChange={handleRatingChangeAlert}
@@ -171,6 +176,7 @@ function App() {
                   <Rating
                     rating={resetRating}
                     editable={true}
+                    enableAnimation={true}
                     starColor="#FF6035"
                     backgroundClass="bg-[#f8f8f8] rounded-md p-0"
                     onChange={handleResetRatingChange}
