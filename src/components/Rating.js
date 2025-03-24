@@ -1,13 +1,21 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion"; // For smooth animations
+import { motion } from "framer-motion";
 
-const Rating = ({ rating, editable = false, onChange }) => {
+const Rating = ({
+  rating,
+  editable,
+  onChange,
+  backgroundClass,
+  startColor,
+}) => {
   const [currentRating, setCurrentRating] = useState(rating || 0);
   const [hoveredRating, setHoveredRating] = useState(0);
 
-  // Handle mouse hover
+  
   const handleMouseEnter = (index) => {
-    setHoveredRating(index);
+    if (editable) {
+      setHoveredRating(index);
+    }
   };
 
   const handleMouseLeave = () => {
@@ -18,7 +26,7 @@ const Rating = ({ rating, editable = false, onChange }) => {
   const handleStarClick = (index) => {
     if (editable && onChange) {
       setCurrentRating(index);
-      onChange(index); // Trigger callback to parent if onChange is provided
+      onChange(index);
     }
   };
 
@@ -33,24 +41,25 @@ const Rating = ({ rating, editable = false, onChange }) => {
           onMouseLeave={handleMouseLeave}
           onClick={() => handleStarClick(starIndex)}
         >
-          <svg
-            className={`w-10 h-10 cursor-pointer transition-all duration-200 ease-in-out ${
-              starIndex <= (hoveredRating || currentRating)
-                ? "text-yellow-500 fill-current"
-                : "text-gray-300 fill-none"
-            }`}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              fill="currentColor"
-              d="M12 17.25l-3.54 2.11a1 1 0 01-1.45-1.05l.68-3.88-2.82-2.76a1 1 0 01.56-1.71l3.9-.32 1.47-3.58a1 1 0 011.9 0l1.47 3.58 3.9.32a1 1 0 01.56 1.71l-2.82 2.76.68 3.88a1 1 0 01-1.45 1.05L12 17.25z"
-            />
-          </svg>
+          <div className={`${backgroundClass}`}>
+            <svg
+              className={`w-10 h-10 cursor-pointer transition-all duration-200 ease-in-out ${
+                starIndex <= (hoveredRating || currentRating)
+                  ? `${startColor} fill-current`
+                  : "text-gray-300 fill-none"
+              }`}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                fill="currentColor"
+                d="M12 17.25l-3.54 2.11a1 1 0 01-1.45-1.05l.68-3.88-2.82-2.76a1 1 0 01.56-1.71l3.9-.32 1.47-3.58a1 1 0 011.9 0l1.47 3.58 3.9.32a1 1 0 01.56 1.71l-2.82 2.76.68 3.88a1 1 0 01-1.45 1.05L12 17.25z"
+              />
+            </svg>
+          </div>
         </motion.div>
       ))}
-   
     </div>
   );
 };
