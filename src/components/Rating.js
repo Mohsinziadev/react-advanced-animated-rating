@@ -1,17 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-const Rating = ({
-  rating,
-  editable,
-  onChange,
-  backgroundClass,
-  startColor,
-}) => {
+const Rating = ({ rating, editable, onChange, backgroundClass, starColor }) => {
   const [currentRating, setCurrentRating] = useState(rating || 0);
   const [hoveredRating, setHoveredRating] = useState(0);
 
-  
   const handleMouseEnter = (index) => {
     if (editable) {
       setHoveredRating(index);
@@ -30,6 +23,10 @@ const Rating = ({
     }
   };
 
+  useEffect(() => {
+    setCurrentRating(rating);
+  }, [rating]);
+
   return (
     <div className="flex items-center space-x-2">
       {[1, 2, 3, 4, 5].map((starIndex) => (
@@ -45,9 +42,15 @@ const Rating = ({
             <svg
               className={`w-10 h-10 cursor-pointer transition-all duration-200 ease-in-out ${
                 starIndex <= (hoveredRating || currentRating)
-                  ? `${startColor} fill-current`
-                  : "text-gray-300 fill-none"
+                  ? "fill-current" // Always apply fill-current for filled stars
+                  : "text-gray-300 fill-none" // Empty stars
               }`}
+              style={{
+                color:
+                  starIndex <= (hoveredRating || currentRating)
+                    ? starColor
+                    : undefined,
+              }} // Apply color dynamically based on the condition
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               stroke="currentColor"
