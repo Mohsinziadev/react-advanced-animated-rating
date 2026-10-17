@@ -1,45 +1,100 @@
 {
   "name": "react-advanced-rating",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.1.0",
-    "@testing-library/user-event": "^13.2.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.0"
+  "version": "3.0.0",
+  "description": "Accessible, animated, zero-dependency rating components for React: stars, hearts, smileys, numeric scales, thumbs and review summaries with fractional precision, keyboard support, RTL and SSR.",
+  "keywords": [
+    "react",
+    "rating",
+    "star-rating",
+    "react-rating",
+    "rating-stars",
+    "half-star",
+    "review",
+    "feedback",
+    "survey",
+    "thumbs",
+    "smiley",
+    "accessible",
+    "a11y",
+    "animated",
+    "typescript",
+    "headless",
+    "react-component"
+  ],
+  "author": "Mohsin Zia",
+  "license": "ISC",
+  "homepage": "https://github.com/Mohsinziadev/react-advanced-animated-rating#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mohsinziadev/react-advanced-animated-rating.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mohsinziadev/react-advanced-animated-rating/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "tsup",
+    "build:demo": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "size": "node scripts/size.mjs",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run build && npm run size",
+    "prepublishOnly": "npm run check"
   },
   "peerDependencies": {
-    "framer-motion": "^12.5.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.17"
+    "@eslint/js": "^10.0.1",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.2",
+    "eslint": "^10.12.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.12.0",
+    "jsdom": "^30.1.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.1",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4"
   }
 }
