@@ -7,6 +7,7 @@ import { CodeBlock, CopyButton, Section } from "./components/ui";
 
 const REPO = "https://github.com/Mohsinziadev/react-advanced-animated-rating";
 const NPM = "https://www.npmjs.com/package/react-advanced-rating";
+const PACKAGES = "https://www.m2toolkit.com/npm-packages";
 const VERSION = "3.0.0";
 
 const MANAGERS = {
@@ -19,23 +20,27 @@ type Manager = keyof typeof MANAGERS;
 
 type Mode = "system" | "light" | "dark";
 
+// The inline script in index.html applies the saved mode before first paint. Reading it
+// through an external store keeps the prerendered HTML ("system") hydration-safe.
+const modeListeners = new Set<() => void>();
+const subscribeMode = (listener: () => void) => {
+  modeListeners.add(listener);
+  return () => modeListeners.delete(listener);
+};
+const readMode = (): Mode => (document.documentElement.dataset.mode as Mode) || "system";
+function writeMode(mode: Mode) {
+  document.documentElement.dataset.mode = mode;
+  try {
+    localStorage.setItem("rar-demo-mode", mode);
+  } catch {
+    /* storage unavailable */
+  }
+  modeListeners.forEach((listener) => listener());
+}
+
 function useColorMode() {
-  const [mode, setMode] = React.useState<Mode>(() => {
-    try {
-      return (localStorage.getItem("rar-demo-mode") as Mode) || "system";
-    } catch {
-      return "system";
-    }
-  });
-  React.useEffect(() => {
-    document.documentElement.dataset.mode = mode;
-    try {
-      localStorage.setItem("rar-demo-mode", mode);
-    } catch {
-      /* storage unavailable */
-    }
-  }, [mode]);
-  return [mode, setMode] as const;
+  const mode = React.useSyncExternalStore(subscribeMode, readMode, () => "system" as Mode);
+  return [mode, writeMode] as const;
 }
 
 const QUICK_START = `import { useState } from "react";
@@ -99,11 +104,13 @@ export function App() {
             <span className="brand-name">react-advanced-rating</span>
             <span className="brand-version">v{VERSION}</span>
           </a>
+          <p className="nav-note">Rebuilt with zero dependencies</p>
           <nav aria-label="Primary" className="nav-links">
             <a href="#playground">Playground</a>
             <a href="#motion">Motion</a>
             <a href="#examples">Examples</a>
             <a href="#api">API</a>
+            <a href={PACKAGES}>More packages</a>
           </nav>
           <div className="nav-actions">
             <button
@@ -144,9 +151,6 @@ export function App() {
       <main id="main">
         <section className="hero" id="top" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="hero-badge">
-              <span className="dot" aria-hidden="true" /> v3: rebuilt with zero dependencies
-            </p>
             <h1 id="hero-title">
               Ratings that feel as good <span className="hero-accent">as they look.</span>
             </h1>
@@ -393,6 +397,7 @@ export function App() {
             <a href={NPM} target="_blank" rel="noreferrer">
               npm
             </a>
+            <a href={PACKAGES}>More packages on M2Toolkit</a>
           </nav>
         </div>
       </footer>

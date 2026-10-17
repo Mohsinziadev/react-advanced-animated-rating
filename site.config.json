@@ -1,0 +1,20 @@
+{
+  "slug": "react-advanced-rating",
+  "url": "https://www.m2toolkit.com/npm-packages/react-advanced-rating",
+  "siteName": "M2Toolkit",
+  "ogImage": "https://www.m2toolkit.com/opengraph-image",
+  "accent": "#f5a524",
+  "title": "React Advanced Rating",
+  "tagline": "Accessible, animated rating components for React.",
+  "highlights": [
+    "Stars, hearts, smileys, number scales and custom icons",
+    "Half and fractional values with a live hover preview",
+    "Keyboard, touch, right-to-left, forms and server rendering",
+    "Thumbs and review-summary companions, zero dependencies"
+  ],
+  "build": {
+    "root": "demo",
+    "viteConfig": "vite.config.ts",
+    "serverEntry": "demo/entry-server.tsx"
+  }
+}

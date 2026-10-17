@@ -5,7 +5,7 @@
 
 **Accessible, animated, zero-dependency rating components for React.** Stars, hearts, smileys, numeric scales, thumbs and review summaries, with fractional precision, keyboard and touch support, RTL, native forms and SSR.
 
-**[Live playground →](https://react-advanced-animated-rating.vercel.app/)**
+**[Live demo and playground →](https://www.m2toolkit.com/npm-packages/react-advanced-rating)**
 
 ```tsx
 import { Rating } from "react-advanced-rating";
@@ -429,6 +429,7 @@ npm run lint       # eslint
 npm run typecheck  # tsc
 npm run build      # library → dist/
 npm run build:demo # playground → demo-dist/
+npm run build:site # prerendered landing page → site-dist/ (used by m2toolkit.com)
 npm run size       # bundle size report
 npm run check      # all of the above (runs before publish)
 ```

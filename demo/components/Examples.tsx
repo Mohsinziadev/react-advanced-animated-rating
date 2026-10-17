@@ -209,6 +209,7 @@ function HelpfulWidget() {
         counts={{ up: base.up + (value === "up" ? 1 : 0), down: base.down + (value === "down" ? 1 : 0) }}
         showLabels
         labels={{ up: "Yes", down: "No" }}
+        formatCount={(n) => n.toLocaleString("en-US")}
       />
     </div>
   );
@@ -292,11 +293,12 @@ function Dashboard() {
         distribution={DISTRIBUTION}
         onSelect={setFilter}
         selected={filter}
+        locale="en-US"
       />
       <div className="review-list">
         <div className="review-list-head">
           <span>
-            {filter ? `${filter}-star reviews` : "All reviews"} · <b>{stats.total.toLocaleString()}</b> total
+            {filter ? `${filter}-star reviews` : "All reviews"} · <b>{stats.total.toLocaleString("en-US")}</b> total
           </span>
           {filter ? (
             <button type="button" className="btn btn-ghost btn-sm" onClick={() => setFilter(null)}>

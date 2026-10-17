@@ -23,7 +23,7 @@
   ],
   "author": "Mohsin Zia",
   "license": "ISC",
-  "homepage": "https://github.com/Mohsinziadev/react-advanced-animated-rating#readme",
+  "homepage": "https://www.m2toolkit.com/npm-packages/react-advanced-rating",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mohsinziadev/react-advanced-animated-rating.git"
@@ -63,6 +63,7 @@
     "start": "vite",
     "build": "tsup",
     "build:demo": "vite build",
+    "build:site": "node scripts/build-site.mjs",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
