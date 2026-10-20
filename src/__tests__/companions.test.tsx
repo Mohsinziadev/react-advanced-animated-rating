@@ -4,7 +4,15 @@ import { hydrateRoot } from "react-dom/client";
 import { renderToString } from "react-dom/server";
 import { act } from "react";
 import { describe, expect, it, vi } from "vitest";
-import { Rating, RatingSummary, ThumbsRating, computeRatingStats, useRating } from "../index";
+import {
+  ExperienceRating,
+  Rating,
+  RatingSummary,
+  ThumbsRating,
+  computeRatingStats,
+  moodForValue,
+  useRating,
+} from "../index";
 import { ceilToStep, decimalsOf, pickColor, roundToStep, sanitizeValue } from "../utils";
 
 describe("utils", () => {
@@ -94,6 +102,38 @@ describe("ThumbsRating", () => {
   });
 });
 
+describe("ExperienceRating", () => {
+  it("labels the stars with the title and follows the value with the mascot", async () => {
+    const onChange = vi.fn();
+    const { container } = render(<ExperienceRating onChange={onChange} />);
+    const slider = screen.getByRole("slider", { name: "Rate your experience" });
+    const mascot = container.querySelector(".rar-xp-mascot");
+    expect(mascot).toHaveAttribute("data-mood", "0");
+    expect(mascot).toHaveAttribute("aria-hidden", "true");
+    await userEvent.click(container.querySelectorAll("[data-rar-item]")[3]);
+    expect(onChange).toHaveBeenLastCalledWith(4);
+    expect(slider).toHaveAttribute("aria-valuetext", "4 out of 5, Good");
+    expect(mascot).toHaveAttribute("data-mood", "4");
+    expect(screen.getByText("(Good)")).toBeInTheDocument();
+  });
+
+  it("renders a close button only when onClose is given", async () => {
+    const onClose = vi.fn();
+    const { rerender } = render(<ExperienceRating defaultValue={2} />);
+    expect(screen.queryByRole("button", { name: "Close" })).toBeNull();
+    rerender(<ExperienceRating defaultValue={2} onClose={onClose} closeLabel="Dismiss" />);
+    await userEvent.click(screen.getByRole("button", { name: "Dismiss" }));
+    expect(onClose).toHaveBeenCalledTimes(1);
+  });
+
+  it("maps any scale to the five moods", () => {
+    expect([0, 1, 2, 3, 4, 5].map((v) => moodForValue(v))).toEqual([0, 1, 2, 3, 4, 5]);
+    expect(moodForValue(0.5)).toBe(1);
+    expect(moodForValue(10, 10)).toBe(5);
+    expect(moodForValue(5, 10)).toBe(3);
+  });
+});
+
 describe("useRating (headless)", () => {
   function PillScale() {
     const rating = useRating({ max: 3, defaultValue: 1, labels: ["Low", "Mid", "High"] });
@@ -127,6 +167,7 @@ describe("SSR", () => {
         <Rating readOnly value={4.2} />
         <ThumbsRating defaultValue="up" />
         <RatingSummary distribution={[1, 2, 3, 4, 5]} />
+        <ExperienceRating defaultValue={3} onClose={() => undefined} />
       </div>
     );
     const html = renderToString(app);

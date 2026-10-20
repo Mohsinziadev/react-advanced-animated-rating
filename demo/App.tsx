@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Rating } from "react-advanced-rating";
 import { Examples } from "./components/Examples";
+import { Experience } from "./components/Experience";
 import { Playground } from "./components/Playground";
 import { Presets } from "./components/Presets";
 import { CodeBlock, CopyButton, Section } from "./components/ui";
@@ -8,7 +9,7 @@ import { CodeBlock, CopyButton, Section } from "./components/ui";
 const REPO = "https://github.com/Mohsinziadev/react-advanced-animated-rating";
 const NPM = "https://www.npmjs.com/package/react-advanced-rating";
 const PACKAGES = "https://www.m2toolkit.com/npm-packages";
-const VERSION = "3.0.0";
+const VERSION = "3.1.0";
 
 const MANAGERS = {
   npm: "npm install react-advanced-rating",
@@ -107,6 +108,7 @@ export function App() {
           <p className="nav-note">Rebuilt with zero dependencies</p>
           <nav aria-label="Primary" className="nav-links">
             <a href="#playground">Playground</a>
+            <a href="#experience">Experience card</a>
             <a href="#motion">Motion</a>
             <a href="#examples">Examples</a>
             <a href="#api">API</a>
@@ -155,8 +157,9 @@ export function App() {
               Ratings that feel as good <span className="hero-accent">as they look.</span>
             </h1>
             <p className="hero-lead">
-              Accessible, animated rating components for React: stars, hearts, smileys, numeric scales, thumbs and
-              review summaries. Fractional precision, keyboard and touch, RTL, forms and SSR included.
+              Accessible, animated rating components for React: stars, hearts, smileys, numeric scales, thumbs,
+              review summaries and an experience card with a mascot that reacts to every score. Fractional precision,
+              keyboard and touch, RTL, forms and SSR included.
             </p>
 
             <div className="install">
@@ -242,6 +245,15 @@ export function App() {
           lead="Every control maps to a real prop. The snippet updates as you change things, and copy gives you exactly what's rendered."
         >
           <Playground />
+        </Section>
+
+        <Section
+          id="experience"
+          eyebrow="New · ExperienceRating"
+          title="A feedback card with a character"
+          lead="Hover the stars and the mascot acts out each score before you commit: hand on head with steam for one star, a shrug in the middle, a jump for joy at the top. The mood word next to the title follows along, and the close button is built in."
+        >
+          <Experience />
         </Section>
 
         <Section
@@ -375,8 +387,8 @@ export function App() {
             </table>
           </div>
           <p className="api-more">
-            Also exported: <code>useRating</code>, <code>ThumbsRating</code>, <code>RatingSummary</code>,{" "}
-            <code>computeRatingStats</code> and the icon components (<code>StarIcon</code>, <code>HeartIcon</code>,{" "}
+            Also exported: <code>useRating</code>, <code>ExperienceRating</code>, <code>ExperienceMascot</code>,{" "}
+            <code>ThumbsRating</code>, <code>RatingSummary</code>, <code>computeRatingStats</code> and the icon components (<code>StarIcon</code>, <code>HeartIcon</code>,{" "}
             <code>FaceIcon</code>…).
           </p>
         </Section>

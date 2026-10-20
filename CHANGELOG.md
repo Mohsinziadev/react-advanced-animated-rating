@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.0
+
+### Added
+
+- `ExperienceRating`: a "Rate your experience" feedback card with a live mood word next to the title, outline stars, an optional close button (`onClose`) and an animated mascot that acts out the hovered or selected score.
+- `ExperienceMascot` (the character on its own, `mood` 0–5) and the `moodForValue` helper.
+
 ## 3.0.0
 
 A ground-up rebuild. Existing 2.x props keep working (deprecated); see "Migrating from 2.x" in the README.

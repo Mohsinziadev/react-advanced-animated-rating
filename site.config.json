@@ -10,7 +10,7 @@
     "Stars, hearts, smileys, number scales and custom icons",
     "Half and fractional values with a live hover preview",
     "Keyboard, touch, right-to-left, forms and server rendering",
-    "Thumbs and review-summary companions, zero dependencies"
+    "Experience card with an animated mascot, thumbs and review summaries"
   ],
   "build": {
     "root": "demo",

@@ -10,6 +10,7 @@ const entries = {
   "{ useRating } (headless)": `export { useRating } from "./dist/index.js";`,
   "{ ThumbsRating }": `export { ThumbsRating } from "./dist/index.js";`,
   "{ RatingSummary }": `export { RatingSummary } from "./dist/index.js";`,
+  "{ ExperienceRating }": `export { ExperienceRating } from "./dist/index.js";`,
 };
 
 const fmt = (n) => `${(n / 1024).toFixed(2)} kB`;

@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/react-advanced-rating.svg)](https://www.npmjs.com/package/react-advanced-rating)
 [![license](https://img.shields.io/npm/l/react-advanced-rating.svg)](./LICENSE)
 
-**Accessible, animated, zero-dependency rating components for React.** Stars, hearts, smileys, numeric scales, thumbs and review summaries, with fractional precision, keyboard and touch support, RTL, native forms and SSR.
+**Accessible, animated, zero-dependency rating components for React.** Stars, hearts, smileys, numeric scales, thumbs, review summaries and an experience card with an animated mascot, with fractional precision, keyboard and touch support, RTL, native forms and SSR.
 
 **[Live demo and playground →](https://www.m2toolkit.com/npm-packages/react-advanced-rating)**
 
@@ -19,7 +19,7 @@ import "react-advanced-rating/styles.css";
 - **Interaction that feels right.** The hover preview tracks the pointer at any precision (½, ¼, 0.1…). Fills cascade in and drain out, commits pop with a spring, and top scores can trigger a particle burst. Touch users can drag across the icons to scrub.
 - **Accessible by default.** Interactive ratings follow the WAI-ARIA slider pattern, with arrow keys, Home/End, PageUp/Down, digits and Backspace. They announce text like "3.5 out of 5, Good". Read-only ratings are exposed as a single image whose name includes the value. Reduced motion and Windows High Contrast are respected.
 - **Tiny and dependency-free.** No animation library and no CSS framework. Animations use CSS transitions and the Web Animations API on DOM nodes, so they cause no React re-renders.
-- **More than stars.** Built-in star, heart, circle, bolt, smiley and numeric icons; any SVG, emoji or render function; colour scales (red → green); `ThumbsRating` for helpful/not-helpful; and `RatingSummary` for review distributions with filters.
+- **More than stars.** Built-in star, heart, circle, bolt, smiley and numeric icons; any SVG, emoji or render function; colour scales (red → green); `ExperienceRating`, a feedback card whose mascot acts out every score; `ThumbsRating` for helpful/not-helpful; and `RatingSummary` for review distributions with filters.
 - **Headless when you need it.** `useRating()` exposes all the state, pointer, keyboard and ARIA logic, so you can render any UI.
 - **Production details.** Controlled and uncontrolled modes, `name`/`required`/form reset support, RTL, i18n label hooks, `"use client"` for React Server Components, strict TypeScript types, ESM + CJS.
 
@@ -32,8 +32,9 @@ Measured with `npm run size` (esbuild, minified, React excluded):
 | `{ useRating }` (headless) | 2.2 kB     |
 | `{ ThumbsRating }`         | 2.6 kB     |
 | `{ Rating }`               | 6.4 kB     |
-| everything                 | 8.1 kB     |
-| `styles.css`               | 3.5 kB     |
+| `{ ExperienceRating }`     | 8.1 kB     |
+| everything                 | 9.8 kB     |
+| `styles.css`               | 5.1 kB     |
 
 Exports are tree-shakable (`sideEffects` is limited to the CSS file).
 
@@ -218,6 +219,25 @@ const [vote, setVote] = useState<ThumbsValue>(null);
 />;
 ```
 
+### Experience card with an animated mascot
+
+```tsx
+import { ExperienceRating } from "react-advanced-rating";
+
+const [open, setOpen] = useState(true);
+
+{open && (
+  <ExperienceRating
+    title="Rate your experience" // default
+    onChange={saveScore}
+    onClose={() => setOpen(false)} // renders the × button
+    size="md" // "sm" | "md" | "lg", or a star size in px
+  />
+)}
+```
+
+A card with a title, a live mood word in brackets ("Rate your experience (Good)"), outline stars and a character who acts out the score as you hover: steam and a hand on the head at one star, a shrug in the middle, a jump for joy at the top. The stars take their accessible name from the title. For your own layouts, the character is exported on its own as `<ExperienceMascot mood={0–5} />`, and `moodForValue(value, max)` maps any scale to its five moods. Theme it with `--rar-xp-bg`, `--rar-xp-color`, `--rar-xp-border`, `--rar-xp-shadow`, `--rar-xp-skin` and `--rar-xp-line`.
+
 ### Review summary and distribution
 
 ```tsx
@@ -336,6 +356,26 @@ Accepts the behaviour props above (`value`, `defaultValue`, `onChange`, `onHover
 ### `<ThumbsRating>`
 
 `value` / `defaultValue` (`"up" | "down" | null`), `onChange`, `readOnly`, `disabled`, `labels` (`{ up, down }`, default "Helpful" / "Not helpful"), `showLabels`, `counts` (`{ up, down }`), `formatCount`, `size`, `animation`, `celebrate` (default `true`), `name`, `aria-label`. It renders a `role="group"` containing two `aria-pressed` toggle buttons.
+
+### `<ExperienceRating>`
+
+`value` / `defaultValue`, `onChange`, `onHoverChange`, `max`, `precision`, `readOnly`, `disabled`, `name`, `required`, `animation`, `celebrate` (default `"max"`): the same as `Rating`. Plus:
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `title` | `ReactNode` | `"Rate your experience"` | Card heading; labels the stars. |
+| `labels` | `string[]` | `["Terrible", "Bad", "Meh", "Good", "Excellent"]` | Mood word per whole value. |
+| `showMoodLabel` | `boolean` | `true` | Show the current word in brackets after the title. |
+| `onClose` / `closeLabel` | `() => void` / `string` | — / `"Close"` | Renders a close button. |
+| `mascot` | `boolean` | `true` | Show the animated character. |
+| `variant` | `"card" \| "plain"` | `"card"` | With or without the card background, border and shadow. |
+| `size` | `"sm" \| "md" \| "lg" \| number \| string` | `"md"` | Star size 24 / 32 / 44 px; the mascot and text scale with it. |
+| `ratingProps` | `RatingProps` | — | Any other prop for the inner `Rating` (`theme`, `color`, `tooltip`…). |
+| `children` | `ReactNode` | — | Rendered under the stars (e.g. a comment box). |
+
+### `<ExperienceMascot>`
+
+`mood` (`0` = waiting, `1` = terrible … `5` = excellent) and an optional `title` (it is decorative and `aria-hidden` without one). Other props go to the `<svg>`.
 
 ### `<RatingSummary>`
 

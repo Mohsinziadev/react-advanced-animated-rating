@@ -17,6 +17,9 @@ export type { ThumbsRatingProps, ThumbsValue } from "./ThumbsRating";
 export { RatingSummary, computeRatingStats } from "./RatingSummary";
 export type { RatingSummaryProps, RatingDistribution, RatingStats } from "./RatingSummary";
 
+export { ExperienceRating, ExperienceMascot, moodForValue } from "./ExperienceRating";
+export type { ExperienceRatingProps, ExperienceMascotProps, MascotMood } from "./ExperienceRating";
+
 export {
   StarIcon,
   HeartIcon,

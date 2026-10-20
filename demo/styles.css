@@ -1,3 +1,40 @@
+/* Figtree — M2Toolkit's own typeface, bundled so this page matches the site (and works standalone). */
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./fonts/figtree-400.woff") format("woff");
+}
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./fonts/figtree-500.woff") format("woff");
+}
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("./fonts/figtree-600.woff") format("woff");
+}
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("./fonts/figtree-700.woff") format("woff");
+}
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("./fonts/figtree-800.woff") format("woff");
+}
+
 /* ================================================================
    Demo site design system
    ================================================================ */
@@ -25,7 +62,7 @@
   --shadow-lg: 0 2px 4px rgb(16 16 20 / 0.04), 0 24px 60px -20px rgb(16 16 20 / 0.22);
   --radius: 14px;
   --radius-sm: 9px;
-  --font: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -1564,6 +1601,127 @@ kbd {
   font: 500 12px var(--mono);
   background: var(--bg-sunken);
 }
+/* ---------- Experience card ---------- */
+.xp {
+  display: grid;
+  gap: 20px;
+}
+.xp-stage {
+  --xp-stage: #dfe1f7;
+  --xp-glow: rgb(255 255 255 / 0.45);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  min-height: 340px;
+  padding: 44px 28px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background:
+    radial-gradient(60% 80% at 100% 100%, var(--xp-glow), transparent 70%),
+    var(--xp-stage);
+}
+.xp-stage .rar-xp {
+  --rar-xp-color: #1d1d1f;
+}
+.xp-slot {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+}
+.xp-main {
+  z-index: 1;
+}
+.xp-main .rar-xp {
+  --rar-xp-shadow: 0 2px 4px rgb(40 40 90 / 0.06), 0 30px 60px -22px rgb(40 40 90 / 0.45);
+}
+.xp-reopen {
+  background: var(--bg-elev);
+}
+.xp-moods {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.xp-moods li {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 18px 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  box-shadow: var(--shadow-sm);
+}
+.xp-moods .rar-xp-mascot {
+  width: 84px;
+  color: var(--text);
+}
+.xp-moods span {
+  color: var(--text-2);
+  font-size: 13px;
+}
+.xp-moods code {
+  color: var(--text-3);
+  font-size: 11.5px;
+}
+.xp-docs {
+  display: grid;
+  gap: 16px;
+}
+:root[data-mode="dark"] .xp-stage {
+  --xp-stage: #23253f;
+  --xp-glow: rgb(140 150 255 / 0.1);
+}
+:root[data-mode="dark"] .xp-stage .rar-xp {
+  --rar-xp-bg: #17182a;
+  --rar-xp-color: #f4f4f5;
+  --rar-xp-border: rgb(255 255 255 / 0.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-mode="light"]) .xp-stage {
+    --xp-stage: #23253f;
+    --xp-glow: rgb(140 150 255 / 0.1);
+  }
+  :root:not([data-mode="light"]) .xp-stage .rar-xp {
+    --rar-xp-bg: #17182a;
+    --rar-xp-color: #f4f4f5;
+    --rar-xp-border: rgb(255 255 255 / 0.08);
+  }
+}
+@media (max-width: 1080px) {
+  .xp-stage {
+    flex-wrap: wrap;
+  }
+  .xp-main {
+    order: -1;
+    flex-basis: 100%;
+  }
+  .xp-moods {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .xp-stage {
+    padding: 28px 12px;
+    gap: 16px;
+  }
+  .xp-main .rar-xp {
+    --rar-xp-star: 34px;
+  }
+  .xp-moods {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .xp-moods .rar-xp-mascot {
+    width: 72px;
+  }
+}
+
 .table-wrap {
   border: 1px solid var(--border);
   border-radius: var(--radius);
